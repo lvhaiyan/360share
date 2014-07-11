@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>amui-demo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/anima/dpl/1.2.1/amui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="https://a.alipayobjects.com/anima/dpl/1.2.1/widget/toast.css" media="all">
+    <script charset="utf-8" src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ontouchstart="" class="pre-iconfont2">
+<div class="am-list am-list-flat">
+    <div class="am-list-item am-list-top">
+        <div class="am-list-content">命运排期</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">雷骏</div>
+        <div class="am-list-extra am-list-key">第1个</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">叶清</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">仈爪</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">途皖</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">轩与</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">杜黑</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">左契</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">崔护</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">丁兴华</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">王小翔</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">陈鹏威</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">袁明娇</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">吕海燕</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">双十</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+    <div class="am-list-item">
+        <div class="am-list-content">侯会茹</div>
+        <div class="am-list-extra">待轮转</div>
+    </div>
+</div>
+<div id="mask" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.1)"></div>
+<div id="loading" class="am-toast fn-hide">
+    <div class="am-toast-text">
+        <span class="am-icon-loading"></span> 命运轮转中
+    </div>
+</div>
+<div id="success" class="am-toast fn-hide">
+    <div class="am-toast-text">
+        <span class="am-icon-success"></span> 已经全部排期
+    </div>
+</div>
+<div style="margin:60px 15px;text-align:center;">
+    <div class="am-flexbox am-flexbox-average">
+        <div class="am-flexbox-item">
+            <a class="btn-random am-button am-button-red" href="#">轮转一个哟！</a>
+        </div>
+        <div class="am-flexbox-item">
+            <a class="btn-random-all am-button am-button-red" href="#">全部轮转！</a>
+        </div>
+    </div>
+</div>
+<script>
+    (function(Z){
+        Z(document).ready(function(){
+            var counter=1;
+            Z('.btn-random').click(function(e){
+                e.preventDefault();
+                var people=Z('.am-list .am-list-item .am-list-extra:not(.am-list-key)');
+                Z('#mask').show();
+                if(people.length>0){
+                    Z('#loading').show();
+                    setTimeout(function(){
+                        var random=parseInt(Math.random()*(people.length));
+                        counter++;
+                        Z('#mask').hide();
+                        Z('#loading').hide();
+                        people.eq(random).addClass('am-list-key').html('第'+counter+'个');
+
+
+                    },2000);
+                }else{
+                    Z('#success').show();
+                    setTimeout(function(){
+                        Z('#mask').hide();
+                        Z('#success').hide();
+                    },2000);
+                }
+            });
+            Z('.btn-random-all').click(function(e){
+                e.preventDefault();
+                var people=Z('.am-list .am-list-item .am-list-extra:not(.am-list-key)');
+                Z('#mask').show();
+                if(people.length>0){
+                    Z('#loading').show();
+                    setTimeout(function(){
+                        for(var i=0;i<people.length;i++){
+                            var peopleFliter=people.filter(':not(.am-list-key)')
+                            var random=parseInt(Math.random()*(peopleFliter.length));
+                            counter++;
+                            peopleFliter.eq(random).addClass('am-list-key').html('第'+counter+'个');
+                        }
+                        Z('#mask').hide();
+                        Z('#loading').hide();
+
+
+                    },2000);
+                }else{
+                    Z('#success').show();
+                    setTimeout(function(){
+                        Z('#mask').hide();
+                        Z('#success').hide();
+                    },2000);
+                }
+
+            });
+        });
+    })(Zepto);
+</script>
+</body>
+</html>
+
