@@ -371,16 +371,16 @@
         splice: [].splice
     };
 
-// 将jQuery对象的fn(即prototype)赋给实例化用的init函数的prototype，使得最后返回的jQuery对象的值拥有init中的this以及fn中的值
-// 这里是框架中非常重要的一环
-// 此处进行了原型链接续，原本，jQuery实例对象，因为它是jQuery.fn.init的实例化，故只能拥有init中的this以及自己的原型链（没有接续前是空）
-// 这里这个操作，把jQuery的原型链（fn是原型链别名）接给了jQuery.fn.init，故最后的jQuery实例对象，拥有了init中的this以及自己的原型链（这时候接上了jQuery的原型链）
-// 注意，后续被扩展在jQuery原型链上的，也会被jQuery实例对象拥有（如jQuery.extend等）
+    // 将jQuery对象的fn(即prototype)赋给实例化用的init函数的prototype，使得最后返回的jQuery对象的值拥有init中的this以及fn中的值
+    // 这里是框架中非常重要的一环
+    // 此处进行了原型链接续，原本，jQuery实例对象，因为它是jQuery.fn.init的实例化，故只能拥有init中的this以及自己的原型链（没有接续前是空）
+    // 这里这个操作，把jQuery的原型链（fn是原型链别名）接给了jQuery.fn.init，故最后的jQuery实例对象，拥有了init中的this以及自己的原型链（这时候接上了jQuery的原型链）
+    // 注意，后续被扩展在jQuery原型链上的，也会被jQuery实例对象拥有（如jQuery.extend等）
     jQuery.fn.init.prototype = jQuery.fn;
 
-//继承是面向对象中一种非常重要的概念，这里是jQuery的一个实现方案
-//jQuery.extend为jQuery本体静态方法扩展入口，jQuery.fn.extend为jQuery实例扩展入口
-//这里两种不能的继承基于同一个方法，但是却为后续框架两种扩展留下入口
+    //继承是面向对象中一种非常重要的概念，这里是jQuery的一个实现方案
+    //jQuery.extend为jQuery本体静态方法扩展入口，jQuery.fn.extend为jQuery实例扩展入口
+    //这里两种不能的继承基于同一个方法，但是却为后续框架两种扩展留下入口
     jQuery.extend = jQuery.fn.extend = function() {
         var options, name, src, copy, copyIsArray, clone,
         //target是传入的第一个值，表示需要应用继承的目标对象
@@ -456,7 +456,7 @@
         // 返回修改后的对象
         return target;
     };
-//这里是扩展在jQuery本体的一些静态方法
+    //这里是扩展在jQuery本体的一些静态方法
     jQuery.extend({
         //防止和其它框架冲突的方法，使用见api
         noConflict: function( deep ) {
@@ -1004,7 +1004,7 @@
         return readyList.promise( obj );
     };
 
-// Populate the class2type map
+    // Populate the class2type map
     jQuery.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
         class2type[ "[object " + name + "]" ] = name.toLowerCase();
     });
